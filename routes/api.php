@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/v1/leads', [\App\Http\Controllers\Api\Lead\LeadController::class, 'save']);
 });
-
-Route::post('/v1/leads', [\App\Http\Controllers\Api\ApiController::class, 'saveLeads']);
