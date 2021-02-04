@@ -7,32 +7,44 @@ use Illuminate\Http\Request;
 
 class LeadController extends Controller
 {
-    /** @OA\Info(title="My First API", version="0.1") */
+    /**
+     * @OA\Info(title="Affzoo Api", version="0.1")
+     */
+
     /**
      * @OA\Post(
-
-     *  path="/v1/leads",
-
-     *  summary="Recieves a lead",
-
-     *  @OA\Parameter(name="name",
-
-     *    required=true,
-
-     *    @OA\Schema(type="string")
-
-     *  ),
-
-     *  @OA\Response(response="200",
-
-     *    description="Validation Response",
-
-     *  )
-
+     *     path="/api/v1/leads/save",
+     *     @OA\Response(response="200", description="Send lead to Affzoo system")
      * )
-
      */
-    public function save(){
+
+    public function save()
+    {
+        return response('Ok', 200);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/leads/{id}/status",
+     *     @OA\Response(response="200", description="Get Lead Status")
+     * )
+     */
+
+    public function leadStatus()
+    {
+        return response('Ok', 200);
+    }
+
+
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/leads/{id}/report-conversion",
+     *     @OA\Response(response="200", description="Get lead conversion status from Brand CRM")
+     * )
+     */
+    public function reportConversion()
+    {
         return response('Ok', 200);
     }
 }
