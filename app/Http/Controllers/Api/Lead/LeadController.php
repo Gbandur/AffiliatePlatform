@@ -22,6 +22,7 @@ class LeadController extends Controller
      *
      *     @OA\Response(
      *         response="200",
+     *         @OA\JsonContent(ref="#/components/schemas/GetLeadStatusResponse"),
      *         description="Lead has been saved",
      *     ),
      *     @OA\RequestBody(
