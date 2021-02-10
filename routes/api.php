@@ -18,6 +18,6 @@ Route::post('/v1/users/login', [\App\Http\Controllers\Api\Auth\AuthController::c
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/v1/leads/save', [\App\Http\Controllers\Api\Lead\LeadController::class, 'save']);
-    Route::get('/v1/leads/{id}/status', [\App\Http\Controllers\Api\Lead\LeadController::class, 'leadStatus']);
+    Route::get('/v1/leads/{lead}/status', [\App\Http\Controllers\Api\Lead\LeadController::class, 'leadStatus']);
     Route::post('/v1/leads/{id}/report-conversion', [\App\Http\Controllers\Api\Lead\LeadController::class, 'reportConversion']);
 });

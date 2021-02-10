@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLeadsTable extends Migration
+class CreateLeadStatusLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateLeadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('leads', function (Blueprint $table) {
+        Schema::create('lead_status_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('affiliate_id')->unsigned();
-            $table->foreign('affiliate_id')
+            $table->bigInteger('lead_id')->unsigned();
+            $table->foreign('lead_id')
                 ->references('id')
-                ->on('affiliates');
+                ->on('leads');
             $table->bigInteger('lead_status_id')->unsigned();
             $table->foreign('lead_status_id')
                 ->references('id')
                 ->on('lead_statuses');
-            $table->bigInteger('brand_id')->unsigned()->nullable();
-            $table->foreign('brand_id')
-                ->references('id')
-                ->on('brands');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -40,6 +35,6 @@ class CreateLeadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leads');
+        Schema::dropIfExists('lead_status_logs');
     }
 }

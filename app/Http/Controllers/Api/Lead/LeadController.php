@@ -5,11 +5,22 @@ namespace App\Http\Controllers\Api\Lead;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportLeadConversionRequest;
 use App\Http\Requests\SaveLeadRequest;
+use App\Models\Lead;
+use App\Repositories\LeadRepositoryInterface;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LeadController extends Controller
 {
+    private LeadRepositoryInterface $leadRepository;
+
+    public function __construct(LeadRepositoryInterface $leadRepository){
+        $this->leadRepository = $leadRepository;
+    }
+
+
     /**
      * @OA\Post(
      *     path="/api/v1/leads/save",
@@ -34,12 +45,12 @@ class LeadController extends Controller
      *
      * @param SaveLeadRequest $request
      *
-     * @return JsonResponse
+     * @return Application|ResponseFactory|JsonResponse|Response
      */
 
     public function save(SaveLeadRequest $request)
     {
-        return response('Ok', 200);
+        return $this->leadRepository->save($request);
     }
 
     /**
@@ -69,12 +80,13 @@ class LeadController extends Controller
      * )
      * Store a newly created resource in storage.
      *
-     * @return JsonResponse
+     * @param Lead $lead
+     * @return mixed
      */
 
-    public function leadStatus()
+    public function leadStatus(Lead $lead)
     {
-        return response('Ok', 200);
+       return $this->leadRepository->getLeadStatus($lead);
     }
 
     /**
@@ -109,11 +121,10 @@ class LeadController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ReportLeadConversionRequest $request
-     *
-     * @return JsonResponse
+     * @param Lead $lead
      */
-    public function reportConversion(ReportLeadConversionRequest $request)
+    public function reportConversion(ReportLeadConversionRequest $request, Lead $lead)
     {
-        return response('Ok', 200);
+        $this->leadRepository->updateLeadStatus($lead, $request);
     }
 }

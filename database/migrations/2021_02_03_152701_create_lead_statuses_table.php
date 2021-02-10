@@ -15,6 +15,8 @@ class CreateLeadStatusesTable extends Migration
     {
         Schema::create('lead_statuses', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

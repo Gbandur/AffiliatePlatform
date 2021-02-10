@@ -16,8 +16,8 @@ class CreateAffiliatesTable extends Migration
         Schema::create('affiliates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('token');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

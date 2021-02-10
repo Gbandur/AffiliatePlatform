@@ -31,7 +31,7 @@ class SaveLeadRequest extends FormRequest
             'address' => 'required|string',
             'post_code' => 'required|string',
             'country' => 'required|string',
-            'phone_number' => 'required|string',
+            'phone' => 'required|string',
             'promo_code' => 'required|string',
             'password' => 'required|string',
             'currency' => 'required|string',
