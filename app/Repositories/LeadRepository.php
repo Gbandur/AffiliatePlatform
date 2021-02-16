@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Repositories;
-
 
 use App\Models\Lead;
 use App\Models\LeadDetail;
@@ -37,7 +34,6 @@ class LeadRepository implements LeadRepositoryInterface
             'password' => $request->get('password'),
             'currency' => $request->get('currency'),
         ]);
-
         LeadStatusLog::create([
             'lead_id' => $lead->id,
             'lead_status_id' => $lead->leadStatus->name,
