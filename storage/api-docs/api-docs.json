@@ -1,0 +1,258 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Affzoo API documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/leads/save": {
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "The endpoint to save the lead in Affzoo system",
+                "operationId": "saveLead",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SaveLeadRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lead has been saved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLeadStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/leads/{id}/status": {
+            "get": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "The endpoint to get a status of the lead in Affzoo system",
+                "operationId": "getLeadStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of Lead",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lead has been saved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLeadStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/leads/{id}/report-conversion": {
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "The endpoint to report the lead conversion",
+                "operationId": "reportConversion",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of Lead",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReportLeadConversionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lead status changed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLeadStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetLeadStatusResponse": {
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "Unique ID of the lead",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the lead",
+                        "type": "string",
+                        "example": "random"
+                    },
+                    "lead_status": {
+                        "title": "Lead Status",
+                        "description": "Status of the lead",
+                        "type": "string",
+                        "example": "random"
+                    }
+                },
+                "type": "object"
+            },
+            "ReportLeadConversionRequest": {
+                "properties": {
+                    "lead_status": {
+                        "title": "Lead Status",
+                        "description": "Status of the lead",
+                        "type": "string",
+                        "example": "random"
+                    }
+                },
+                "type": "object"
+            },
+            "SaveLeadRequest": {
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the lead",
+                        "type": "string",
+                        "example": "random"
+                    },
+                    "first_name": {
+                        "title": "First Name",
+                        "description": "First Name of the lead",
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "last_name": {
+                        "title": "Last Name",
+                        "description": "Last Name of the lead",
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email of the lead",
+                        "type": "string",
+                        "example": "johndoe@example.com"
+                    },
+                    "address": {
+                        "title": "Address",
+                        "description": "Address of the lead",
+                        "type": "string",
+                        "example": "address"
+                    },
+                    "post_code": {
+                        "title": "Postal Code",
+                        "description": "Postal Code of the lead",
+                        "type": "string",
+                        "example": "post-code"
+                    },
+                    "country": {
+                        "title": "Country",
+                        "description": "Country of the lead",
+                        "type": "string",
+                        "example": "country"
+                    },
+                    "phone": {
+                        "title": "Phone",
+                        "description": "Phone of the lead",
+                        "type": "string",
+                        "example": "+995555555555"
+                    },
+                    "promo_code": {
+                        "title": "promo Code",
+                        "description": "Promo Code of the lead",
+                        "type": "string",
+                        "example": "Promo123"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password",
+                        "type": "string",
+                        "example": "testPassword"
+                    },
+                    "currency": {
+                        "title": "Currency",
+                        "description": "Currency of the lead",
+                        "type": "string",
+                        "example": "EURO"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Examples",
+            "description": "Some example pages"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
