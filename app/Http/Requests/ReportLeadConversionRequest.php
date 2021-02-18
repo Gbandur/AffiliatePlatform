@@ -24,7 +24,7 @@ class ReportLeadConversionRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|integer'
+            'lead_status' => 'required|integer'
         ];
     }
 }
