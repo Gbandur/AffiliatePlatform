@@ -125,6 +125,6 @@ class LeadController extends Controller
      */
     public function reportConversion(ReportLeadConversionRequest $request, Lead $lead)
     {
-        $this->leadRepository->updateLeadStatus($lead, $request);
+        return $this->leadRepository->updateLeadStatus($lead, $request);
     }
 }
