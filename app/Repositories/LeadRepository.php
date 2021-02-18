@@ -36,7 +36,7 @@ class LeadRepository implements LeadRepositoryInterface
         ]);
         LeadStatusLog::create([
             'lead_id' => $lead->id,
-            'lead_status_id' => $lead->leadStatus->name,
+            'lead_status_id' => $lead->leadStatus->id,
             'created' => Carbon::now()
         ]);
 
