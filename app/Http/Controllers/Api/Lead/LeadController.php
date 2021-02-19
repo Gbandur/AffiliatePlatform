@@ -48,7 +48,7 @@ class LeadController extends Controller
      * @return Application|ResponseFactory|JsonResponse|Response
      */
 
-    public function save(SaveLeadRequest $request)
+    public function store(SaveLeadRequest $request)
     {
         return $this->leadRepository->save($request);
     }
