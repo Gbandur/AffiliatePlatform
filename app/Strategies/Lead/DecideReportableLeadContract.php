@@ -3,5 +3,5 @@
 namespace App\Strategies\Lead;
 
 interface DecideReportableLeadContract{
-    public function decide(array $leadData);
+    public function decide(array $requestData):bool;
 }
