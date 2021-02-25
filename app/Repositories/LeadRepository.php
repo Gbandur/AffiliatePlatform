@@ -18,7 +18,7 @@ class LeadRepository implements LeadRepositoryInterface
         $lead = Lead::create([
             'name' => $request->get('name'),
             'affiliate_id' => Auth::user()->getAuthIdentifier(),
-            'lead_status_id' => 1
+            'lead_status_id' => Lead::STATUS_NEW
         ]);
 
         LeadDetail::create([

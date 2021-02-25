@@ -6,8 +6,14 @@ namespace App\Strategies\Lead;
 
 class DecideReportableLeadDefaultReporting implements DecideReportableLeadContract
 {
-    public function decide(array $requestData)
+    public function available(array $requestData): bool
     {
-        // TODO: Implement decide() method.
+        return true;
+    }
+
+    public function decide(array $requestData): bool
+    {
+        return true;
+
     }
 }

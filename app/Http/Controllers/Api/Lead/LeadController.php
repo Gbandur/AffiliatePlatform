@@ -10,7 +10,10 @@ use App\Repositories\LeadRepositoryInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use function React\Promise\all;
 
 class LeadController extends Controller
 {
@@ -48,9 +51,61 @@ class LeadController extends Controller
      * @return Application|ResponseFactory|JsonResponse|Response
      */
 
-    public function store(SaveLeadRequest $request)
+    public function store(Request $request)
     {
-        return $this->leadRepository->save($request);
+        if (empty($request->json()->all())) {
+            return response()->json([
+                'message' => 'The request is not a valid JSON.',
+            ], 400);
+        }
+        $data = json_decode($request->getContent(), true);
+        $rules = [
+            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'post_code' => 'required',
+            'country' => 'required',
+            'phone' => 'required',
+            'promo_code' => 'required',
+            'password' => 'required',
+            'currency' => 'required',
+        ];
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->passes()) {
+            $newLead = $this->leadRepository->save($request);
+//            $leadReportingStrategies = [
+//                \App\Strategies\Lead\DecideReportableLeadBasedOnCountry::class,
+//                \App\Strategies\Lead\DecideReportableLeadBasedOnAffiliate::class,
+//                \App\Strategies\Lead\DecideReportableLeadDefaultReporting::class,
+//            ];
+//            foreach ($leadReportingStrategies as $strategy) {
+//                $strategyProvider = app($strategy);
+//
+//                $decisionAvailable = $strategyProvider->available($request->all());
+//
+//                if ($decisionAvailable === false) {
+//                    continue;
+//                }
+//                $decision = $strategyProvider->decide($request);
+//
+//                $newLead->report_or_not = $decision;
+//                $newLead->save();
+//                break;
+//            }
+            return response()
+                ->json(
+                    ['data' => $newLead]
+                );
+        } else {
+            //TODO Handle your error
+//           return \response($validator->errors()->all(), 500);
+            return response()
+                ->json(['messages' => $validator->errors()->all()]);
+        }
+
     }
 
     /**

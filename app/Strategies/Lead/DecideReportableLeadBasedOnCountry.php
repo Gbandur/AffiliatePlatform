@@ -6,8 +6,14 @@ namespace App\Strategies\Lead;
 
 class DecideReportableLeadBasedOnCountry implements DecideReportableLeadContract
 {
-    public function decide(array $requestData)
+    public function available(array $requestData): bool
     {
-        // TODO: Implement decide() method.
+        return ($requestData['country'] = 'UK');
+    }
+
+    public function decide(array $requestData): bool
+    {
+        $randomChance = rand(1, 100);
+        return ($randomChance > 90);
     }
 }

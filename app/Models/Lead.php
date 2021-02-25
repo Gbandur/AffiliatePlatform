@@ -9,6 +9,10 @@ class Lead extends Model
 {
     use HasFactory;
 
+    const STATUS_NEW = 1;
+    const STATUS_CONVERTED = 2;
+    const STATUS_CANCELED = 3;
+
     protected $fillable = [
         'name',
         'affiliate_id',
