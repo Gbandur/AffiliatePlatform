@@ -22,6 +22,24 @@ class HandleLeadReporting
 
     public function decideLeadReport (array $requestData): bool
     {
-        return $this->decision->decide($requestData);
+//                    $leadReportingStrategies = [
+//                \App\Strategies\Lead\DecideReportableLeadBasedOnCountry::class,
+//                \App\Strategies\Lead\DecideReportableLeadBasedOnAffiliate::class,
+//                \App\Strategies\Lead\DecideReportableLeadDefaultReporting::class,
+//            ];
+//            foreach ($leadReportingStrategies as $strategy) {
+//                $strategyProvider = app($strategy);
+//
+//                $decisionAvailable = $strategyProvider->available($request->all());
+//
+//                if ($decisionAvailable === false) {
+//                    continue;
+//                }
+//                $decision = $strategyProvider->decide($request);
+//
+//                $newLead->report_or_not = $decision;
+//                $newLead->save();
+//                break;
+//            }
     }
 }

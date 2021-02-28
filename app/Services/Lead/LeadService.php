@@ -1,5 +1,8 @@
 <?php
-namespace App\Repositories;
+
+
+namespace App\Services\Lead;
+
 
 use App\Models\Lead;
 use App\Models\LeadDetail;
@@ -7,13 +10,9 @@ use App\Models\LeadStatusLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class LeadRepository implements LeadRepositoryInterface
+class LeadService
 {
-
-    public function save($request)
-    {
-
-        // mb use db transactions?
+    public function store($request){
 
         $lead = Lead::create([
             'name' => $request->get('name'),
@@ -41,7 +40,6 @@ class LeadRepository implements LeadRepositoryInterface
         ]);
 
         return $lead;
-
     }
 
     public function getLeadStatus($lead){

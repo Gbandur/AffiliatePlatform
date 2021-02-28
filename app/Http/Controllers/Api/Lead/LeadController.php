@@ -76,25 +76,7 @@ class LeadController extends Controller
         $validator = Validator::make($data, $rules);
         if ($validator->passes()) {
             $newLead = $this->leadRepository->save($request);
-//            $leadReportingStrategies = [
-//                \App\Strategies\Lead\DecideReportableLeadBasedOnCountry::class,
-//                \App\Strategies\Lead\DecideReportableLeadBasedOnAffiliate::class,
-//                \App\Strategies\Lead\DecideReportableLeadDefaultReporting::class,
-//            ];
-//            foreach ($leadReportingStrategies as $strategy) {
-//                $strategyProvider = app($strategy);
-//
-//                $decisionAvailable = $strategyProvider->available($request->all());
-//
-//                if ($decisionAvailable === false) {
-//                    continue;
-//                }
-//                $decision = $strategyProvider->decide($request);
-//
-//                $newLead->report_or_not = $decision;
-//                $newLead->save();
-//                break;
-//            }
+
             return response()
                 ->json(
                     ['data' => $newLead]
